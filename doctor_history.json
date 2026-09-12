@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2026-09-12T16:41:55.953264",
+    "score": 100,
+    "passed": 22,
+    "warnings": 0,
+    "errors": 0,
+    "duration": 4.57297
+  },
+  {
+    "timestamp": "2026-09-12T17:07:10.347826",
+    "score": 100,
+    "passed": 22,
+    "warnings": 0,
+    "errors": 0,
+    "duration": 4.635235
+  }
+]

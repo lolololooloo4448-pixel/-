@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>🩺 Doctor Report — 12.09.2026 17:07:10</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #e0e0e0; min-height: 100vh; padding: 30px 20px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    font-size: 32px; margin-bottom: 10px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .subtitle { color: #888; margin-bottom: 30px; font-size: 14px; }
+  .score-card {
+    background: rgba(255,255,255,0.05); border-radius: 20px;
+    padding: 30px; margin-bottom: 30px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .score {
+    font-size: 72px; font-weight: bold; margin-bottom: 10px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .score-label { color: #aaa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+  .progress-bar {
+    width: 100%; height: 12px; background: rgba(255,255,255,0.1);
+    border-radius: 6px; overflow: hidden; margin: 20px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 6px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+  }
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; margin-top: 20px;
+  }
+  .stat {
+    background: rgba(0,0,0,0.3); padding: 15px;
+    border-radius: 12px; text-align: center;
+  }
+  .stat-value { font-size: 28px; font-weight: bold; }
+  .stat-label { font-size: 12px; color: #888; margin-top: 5px; }
+  .stat.ok .stat-value { color: #4ade80; }
+  .stat.warn .stat-value { color: #fbbf24; }
+  .stat.error .stat-value { color: #f87171; }
+  .stat.info .stat-value { color: #60a5fa; }
+  .section {
+    background: rgba(255,255,255,0.03); border-radius: 16px;
+    padding: 20px; margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .section h2 {
+    font-size: 18px; margin-bottom: 15px; color: #fff;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .check {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px; border-radius: 10px; margin-bottom: 8px;
+    background: rgba(0,0,0,0.2);
+  }
+  .check.ok { border-left: 3px solid #4ade80; }
+  .check.warn { border-left: 3px solid #fbbf24; }
+  .check.error { border-left: 3px solid #f87171; }
+  .check.info { border-left: 3px solid #60a5fa; }
+  .check-icon { font-size: 20px; flex-shrink: 0; }
+  .check-content { flex: 1; }
+  .check-name { font-weight: 600; margin-bottom: 4px; }
+  .check-message { font-size: 13px; color: #aaa; }
+  .check-details {
+    margin-top: 8px; padding: 10px; background: rgba(0,0,0,0.4);
+    border-radius: 6px; font-family: monospace; font-size: 12px;
+    color: #ccc; max-height: 200px; overflow-y: auto;
+  }
+  .check-details div { margin-bottom: 3px; }
+  .fix {
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 6px;
+    background: rgba(0,0,0,0.2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .fix-status { font-size: 12px; padding: 3px 8px; border-radius: 6px; }
+  .fix-status.ok { background: #4ade8022; color: #4ade80; }
+  .fix-status.warn { background: #fbbf2422; color: #fbbf24; }
+  .fix-status.error { background: #f8717122; color: #f87171; }
+  .fix-status.info { background: #60a5fa22; color: #60a5fa; }
+  .footer {
+    text-align: center; color: #666; font-size: 12px;
+    margin-top: 40px; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .timestamp {
+    display: inline-block; padding: 4px 10px;
+    background: rgba(0,210,255,0.15); border-radius: 6px;
+    color: #00d2ff; font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🩺 Doctor Report</h1>
+  <p class="subtitle">
+    Перевірка бота • <span class="timestamp">12.09.2026 17:07:10</span> •
+    Тривалість: 4.64с
+  </p>
+  <div class="score-card">
+    <div class="score">100%</div>
+    <div class="score-label">Загальний стан</div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 100%"></div>
+    </div>
+    <div class="stats">
+      <div class="stat ok"><div class="stat-value">22</div>
+        <div class="stat-label">✅ Пройдено</div></div>
+      <div class="stat warn"><div class="stat-value">0</div>
+        <div class="stat-label">⚠️ Попередження</div></div>
+      <div class="stat error"><div class="stat-value">0</div>
+        <div class="stat-label">❌ Помилки</div></div>
+      <div class="stat info"><div class="stat-value">22</div>
+        <div class="stat-label">📊 Всього</div></div>
+    </div>
+  </div>
+  
+        <div class="section">
+          <h2>📂 Файли</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">bot.py</div>
+                <div class="check-message">95834 байт</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">.env</div>
+                <div class="check-message">191 байт</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">requirements.txt</div>
+                <div class="check-message">56 байт</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 .env</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">BOT_TOKEN</div>
+                <div class="check-message">Знайдено (8929395029...uH74)</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Пакети</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">aiogram</div>
+                <div class="check-message">v3.30.0</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">aiosqlite</div>
+                <div class="check-message">v0.22.1</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">dotenv</div>
+                <div class="check-message">v?</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Синтаксис</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">bot.py</div>
+                <div class="check-message">88888 символів</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Стиль</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Довгі рядки</div>
+                <div class="check-message">≤ 120</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">print()</div>
+                <div class="check-message">OK</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Імпорти</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Невикористані</div>
+                <div class="check-message">Усі використано</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Await</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Перевірка</div>
+                <div class="check-message">OK</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Функції</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Дублікати</div>
+                <div class="check-message">Усі унікальні</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 Обробка</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Bare except</div>
+                <div class="check-message">OK</div>
+                
+              </div>
+            </div>
+        </div>
+        <div class="section">
+          <h2>📂 БД</h2>
+          
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Існування</div>
+                <div class="check-message">53248 байт</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця users</div>
+                <div class="check-message">10 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця interests</div>
+                <div class="check-message">2 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця blocks</div>
+                <div class="check-message">2 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця reports</div>
+                <div class="check-message">5 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця ad_campaigns</div>
+                <div class="check-message">13 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця top_boosts</div>
+                <div class="check-message">9 колонок</div>
+                
+              </div>
+            </div>
+            <div class="check ok">
+              <div class="check-icon">✅</div>
+              <div class="check-content">
+                <div class="check-name">Таблиця payments</div>
+                <div class="check-message">7 колонок</div>
+                
+              </div>
+            </div>
+        </div>
+  
+  
+  <div class="footer">🩺 Doctor v3.0 • Згенеровано 12.09.2026 17:07:10</div>
+</div>
+</body>
+</html>

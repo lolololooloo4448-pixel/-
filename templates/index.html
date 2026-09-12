@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>🩺 Doctor Web Panel</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 30px 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  h1 {
+    font-size: 32px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .btn:hover { transform: scale(1.05); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: #e0e0e0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .card h2 {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .score-big {
+    font-size: 64px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    transition: width 1s ease;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .stat-value { font-size: 24px; font-weight: bold; }
+  .stat-label { font-size: 11px; color: #888; margin-top: 4px; }
+
+  .chart-container {
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 20px 0;
+  }
+  .bar {
+    flex: 1;
+    background: linear-gradient(180deg, #00d2ff, #3a7bd5);
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: height 0.3s;
+    position: relative;
+  }
+  .bar:hover::after {
+    content: attr(data-score) "%";
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a2e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background: rgba(0,0,0,0.2);
+    border-left: 3px solid #666;
+  }
+  .check-item.ok { border-left-color: #4ade80; }
+  .check-item.warn { border-left-color: #fbbf24; }
+  .check-item.error { border-left-color: #f87171; }
+  .check-item.info { border-left-color: #60a5fa; }
+  .check-name { font-weight: 600; margin-bottom: 4px; }
+  .check-message { font-size: 13px; color: #aaa; }
+
+  .loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    background: #1a1a2e;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { border-color: #4ade80; }
+  .toast.error { border-color: #f87171; }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div>
+      <h1>🩺 Doctor Web Panel</h1>
+      <p style="color: #888; margin-top: 8px; font-size: 14px;">
+        Перевірка стану бота в реальному часі
+      </p>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <button class="btn btn-secondary" onclick="downloadHTML()">📄 HTML</button>
+      <button class="btn btn-secondary" onclick="downloadJSON()">📊 JSON</button>
+      <button class="btn" id="runBtn" onclick="runDoctor()">▶️ Запустити Doctor</button>
+    </div>
+  </header>
+
+  {% if report %}
+  <div class="grid">
+    <!-- Score -->
+    <div class="card">
+      <h2>Загальний стан</h2>
+      <div class="score-big">{{ report.score }}%</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ report.score }}%"></div>
+      </div>
+      <div class="stats-row">
+        <div>
+          <div class="stat-value" style="color: #4ade80;">{{ report.passed }}</div>
+          <div class="stat-label">✅ Пройдено</div>
+        </div>
+        <div>
+          <div class="stat-value" style="color: #fbbf24;">{{ report.warnings }}</div>
+          <div class="stat-label">⚠️ Попередж.</div>
+        </div>
+        <div>
+          <div class="stat-value" style="color: #f87171;">{{ report.errors }}</div>
+          <div class="stat-label">❌ Помилки</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meta -->
+    <div class="card">
+      <h2>Деталі</h2>
+      <div style="line-height: 1.8;">
+        <div>📅 <b>Час:</b> {{ report.start_time[:19].replace('T', ' ') }}</div>
+        <div>⏱ <b>Тривалість:</b> {{ "%.2f"|format(report.duration) }}с</div>
+        <div>📁 <b>Всього:</b> {{ report.total }}</div>
+        {% if report.tests %}
+        <div>🧪 <b>Тести:</b> {{ report.tests|selectattr('status', 'equalto', 'ok')|list|length }}/{{ report.tests|length }}</div>
+        {% endif %}
+        {% if report.fixes %}
+        <div>🔧 <b>Виправлення:</b> {{ report.fixes|selectattr('status', 'equalto', 'ok')|list|length }}/{{ report.fixes|length }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="card" style="grid-column: span 2;">
+      <h2>Історія (останні {{ history|length }})</h2>
+      {% if history %}
+      <div class="chart-container">
+        {% for h in history %}
+        <div class="bar" style="height: {{ h.score }}%;" data-score="{{ h.score }}"></div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty">Немає історії</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Checks -->
+  <div class="card">
+    <h2>Перевірки</h2>
+    {% set categories = {} %}
+    {% for check in report.checks %}
+      {% if check.category not in categories %}
+        {% set _ = categories.update({check.category: []}) %}
+      {% endif %}
+      {% set _ = categories[check.category].append(check) %}
+    {% endfor %}
+
+    {% for cat, checks in categories.items() %}
+      <h3 style="margin: 20px 0 10px; color: #00d2ff;">📂 {{ cat }}</h3>
+      {% for c in checks %}
+      <div class="check-item {{ c.status }}">
+        <div style="font-size: 20px;">
+          {% if c.status == 'ok' %}✅
+          {% elif c.status == 'warn' %}⚠️
+          {% elif c.status == 'error' %}❌
+          {% else %}ℹ️{% endif %}
+        </div>
+        <div style="flex: 1;">
+          <div class="check-name">{{ c.name }}</div>
+          <div class="check-message">{{ c.message }}</div>
+          {% if c.details %}
+          <div style="margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.4); border-radius: 6px; font-family: monospace; font-size: 12px; color: #ccc;">
+            {% for d in c.details[:5] %}
+            <div>{{ d }}</div>
+            {% endfor %}
+            {% if c.details|length > 5 %}
+            <div style="color: #666;">... та ще {{ c.details|length - 5 }}</div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="card empty">
+    <h2>Немає звіту</h2>
+    <p style="margin: 20px 0;">Натисни "Запустити Doctor" щоб почати</p>
+  </div>
+  {% endif %}
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TOKEN = "{{ token }}";
+
+async function runDoctor() {
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading"></span> Перевіряю...';
+
+  try {
+    const r = await fetch(`/api/run?token=${TOKEN}&db=true&test=true`, {
+      method: 'POST'
+    });
+    const data = await r.json();
+
+    if (data.success) {
+      showToast('✅ Перевірку завершено!', 'success');
+      setTimeout(() => location.reload(), 1000);
+    } else {
+      showToast('⚠️ Є проблеми — дивись звіт', 'error');
+      setTimeout(() => location.reload(), 1500);
+    }
+  } catch (e) {
+    showToast('❌ Помилка: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '▶️ Запустити Doctor';
+  }
+}
+
+function downloadHTML() {
+  window.location.href = `/download/html?token=${TOKEN}`;
+}
+function downloadJSON() {
+  window.location.href = `/download/json?token=${TOKEN}`;
+}
+
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+// Авто-оновлення кожні 60 секунд
+setInterval(async () => {
+  try {
+    const r = await fetch(`/api/report?token=${TOKEN}`);
+    if (r.ok) {
+      const data = await r.json();
+      // перевіряємо чи змінився score
+      const currentScore = {{ report.score if report else 0 }};
+      if (data.score !== currentScore) {
+        location.reload();
+      }
+    }
+  } catch (e) {}
+}, 60000);
+</script>
+</body>
+</html>

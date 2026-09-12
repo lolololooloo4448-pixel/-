@@ -1,0 +1,212 @@
+{
+  "start_time": "2026-09-12T17:07:10.347826",
+  "end_time": "2026-09-12T17:07:14.983061",
+  "duration": 4.635235,
+  "score": 100,
+  "total": 22,
+  "passed": 22,
+  "warnings": 0,
+  "errors": 0,
+  "checks": [
+    {
+      "category": "Файли",
+      "name": "bot.py",
+      "status": "ok",
+      "message": "95834 байт",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Файли",
+      "name": ".env",
+      "status": "ok",
+      "message": "191 байт",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Файли",
+      "name": "requirements.txt",
+      "status": "ok",
+      "message": "56 байт",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": ".env",
+      "name": "BOT_TOKEN",
+      "status": "ok",
+      "message": "Знайдено (8929395029...uH74)",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Пакети",
+      "name": "aiogram",
+      "status": "ok",
+      "message": "v3.30.0",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Пакети",
+      "name": "aiosqlite",
+      "status": "ok",
+      "message": "v0.22.1",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Пакети",
+      "name": "dotenv",
+      "status": "ok",
+      "message": "v?",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Синтаксис",
+      "name": "bot.py",
+      "status": "ok",
+      "message": "88888 символів",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Стиль",
+      "name": "Довгі рядки",
+      "status": "ok",
+      "message": "≤ 120",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Імпорти",
+      "name": "Невикористані",
+      "status": "ok",
+      "message": "Усі використано",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Await",
+      "name": "Перевірка",
+      "status": "ok",
+      "message": "OK",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Функції",
+      "name": "Дублікати",
+      "status": "ok",
+      "message": "Усі унікальні",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Обробка",
+      "name": "Bare except",
+      "status": "ok",
+      "message": "OK",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "Стиль",
+      "name": "print()",
+      "status": "ok",
+      "message": "OK",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Існування",
+      "status": "ok",
+      "message": "53248 байт",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця users",
+      "status": "ok",
+      "message": "10 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця interests",
+      "status": "ok",
+      "message": "2 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця blocks",
+      "status": "ok",
+      "message": "2 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця reports",
+      "status": "ok",
+      "message": "5 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця ad_campaigns",
+      "status": "ok",
+      "message": "13 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця top_boosts",
+      "status": "ok",
+      "message": "9 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    },
+    {
+      "category": "БД",
+      "name": "Таблиця payments",
+      "status": "ok",
+      "message": "7 колонок",
+      "details": [],
+      "line": null,
+      "file": null
+    }
+  ],
+  "fixes": [],
+  "tests": []
+}
